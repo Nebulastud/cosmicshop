@@ -263,7 +263,7 @@
             <p id="detailDesc"></p>
 
             <!-- TOMBOL BELI -->
-            <a id="detailBuyBtn" class="btn-beli-detail" href="https://wa.me/6283821627163" target="_blank">Beli Sekarang</a>
+            <a id="detailBuyBtn" class="btn-beli-detail" href="#" target="_blank">Beli Sekarang</a>
         </div>
     </div>
 
@@ -296,7 +296,7 @@
             document.getElementById("detailDesc").innerText = desc;
 
             // 👉 Auto WhatsApp Fill
-            let wa = "https://wa.me/628xxx?text=Halo,%20saya%20ingin%20beli%20" + encodeURIComponent(title);
+            let wa = "https://wa.me/6283821627163" + encodeURIComponent(title);
             document.getElementById("detailBuyBtn").href = wa;
 
             document.getElementById("modalDetail").style.display = "flex";
