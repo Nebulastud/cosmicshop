@@ -296,7 +296,7 @@
             document.getElementById("detailDesc").innerText = desc;
 
             // 👉 Auto WhatsApp Fill
-            let wa = "https://wa.me/6283821627163" + encodeURIComponent(title);
+            let wa = "https://wa.me/6283821627163?text=" + encodeURIComponent("Halo, Saya mau beli " + title);
             document.getElementById("detailBuyBtn").href = wa;
 
             document.getElementById("modalDetail").style.display = "flex";
