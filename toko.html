@@ -108,16 +108,6 @@
             margin-bottom: 10px;
         }
 
-        .produk h3 {
-            font-size: 16px;
-            margin: 5px 0;
-        }
-
-        .produk p {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
         /* MODAL DETAIL PRODUK */
         .modal {
             display: none;
@@ -153,6 +143,22 @@
             float: right;
             font-size: 22px;
             cursor: pointer;
+        }
+
+        /* NEW: BUTTON BELI */
+        .btn-beli-detail {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #00eaff;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .btn-beli-detail:hover {
+            background: white;
         }
 
         /* BOTTOM NAV */
@@ -194,7 +200,7 @@
 
 <body>
 
-    <!-- BACKGROUND VIDEO -->
+    <!-- VIDEO -->
     <video autoplay muted loop playsinline id="bg-video">
         <source src="background.mp4" type="video/mp4">
     </video>
@@ -203,7 +209,7 @@
         TOKO DIGITAL
     </header>
 
-    <!-- PENCARIAN & FILTER -->
+    <!-- FILTER -->
     <div class="filter-box">
         <input type="text" id="searchInput" placeholder="Cari produk...">
 
@@ -215,28 +221,32 @@
         </div>
     </div>
 
-    <!-- PRODUK LIST -->
+    <!-- PRODUK -->
     <div class="produk-container" id="produkList">
 
-        <div class="produk" data-kategori="premium" onclick="openDetail('produk1.jpg','Produk 1','Deskripsi produk 1 lengkap...')">
+        <div class="produk" data-kategori="premium"
+            onclick="openDetail('produk1.jpg','Produk 1','Deskripsi lengkap produk 1')">
             <img src="produk1.jpg">
             <h3>Produk 1</h3>
             <p>Premium</p>
         </div>
 
-        <div class="produk" data-kategori="digital" onclick="openDetail('produk2.jpg','Produk 2','Deskripsi lengkap produk 2...')">
+        <div class="produk" data-kategori="digital"
+            onclick="openDetail('produk2.jpg','Produk 2','Deskripsi lengkap produk 2')">
             <img src="produk2.jpg">
             <h3>Produk 2</h3>
             <p>Digital</p>
         </div>
 
-        <div class="produk" data-kategori="murah" onclick="openDetail('produk3.jpg','Produk 3','Produk murah berkualitas.')">
+        <div class="produk" data-kategori="murah"
+            onclick="openDetail('produk3.jpg','Produk 3','Produk murah dan berkualitas')">
             <img src="produk3.jpg">
             <h3>Produk 3</h3>
             <p>Murah</p>
         </div>
 
-        <div class="produk" data-kategori="premium" onclick="openDetail('produk4.jpg','Produk 4','Produk premium terbaik.')">
+        <div class="produk" data-kategori="premium"
+            onclick="openDetail('produk4.jpg','Produk 4','Produk premium terbaik')">
             <img src="produk4.jpg">
             <h3>Produk 4</h3>
             <p>Premium</p>
@@ -244,19 +254,22 @@
 
     </div>
 
-    <!-- MODAL DETAIL PRODUK -->
+    <!-- MODAL DETAIL -->
     <div class="modal" id="modalDetail">
         <div class="modal-content">
             <span class="close" onclick="closeDetail()">&times;</span>
             <img id="detailImg">
             <h2 id="detailTitle"></h2>
             <p id="detailDesc"></p>
+
+            <!-- TOMBOL BELI -->
+            <a id="detailBuyBtn" class="btn-beli-detail" href="#" target="_blank">Beli Sekarang</a>
         </div>
     </div>
 
     <!-- SCRIPT -->
     <script>
-        // SEARCH PRODUK
+        // SEARCH
         document.getElementById("searchInput").addEventListener("keyup", function () {
             let value = this.value.toLowerCase();
             let produk = document.querySelectorAll(".produk");
@@ -267,26 +280,25 @@
             });
         });
 
-        // FILTER KATEGORI
+        // FILTER
         function filterKategori(kat) {
             let produk = document.querySelectorAll(".produk");
-
             produk.forEach(p => {
                 let jenis = p.getAttribute("data-kategori");
-
-                if (kat === "all" || jenis === kat) {
-                    p.style.display = "block";
-                } else {
-                    p.style.display = "none";
-                }
+                p.style.display = (kat === "all" || jenis === kat) ? "block" : "none";
             });
         }
 
-        // DETAIL PRODUK (MODAL)
+        // MODAL DETAIL + LINK BELI
         function openDetail(img, title, desc) {
             document.getElementById("detailImg").src = img;
             document.getElementById("detailTitle").innerText = title;
             document.getElementById("detailDesc").innerText = desc;
+
+            // 👉 Auto WhatsApp Fill
+            let wa = "https://wa.me/628xxx?text=Halo,%20saya%20ingin%20beli%20" + encodeURIComponent(title);
+            document.getElementById("detailBuyBtn").href = wa;
+
             document.getElementById("modalDetail").style.display = "flex";
         }
 
