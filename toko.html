@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMIC SHOP - Toko</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+        /* --- GRID PRODUK --- */
+        .produk-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); /* lebih kecil */
+            gap: 12px; /* rapat */
+            padding: 15px;
+        }
+
+        /* --- CARD PRODUK --- */
+        .produk {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(6px);
+            border-radius: 12px;
+            padding: 10px; /* kecil */
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        .produk:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.03);
+        }
+
+        /* --- GAMBAR PRODUK --- */
+        .produk img {
+            width: 55%;             /* lebih kecil lagi */
+            height: auto;
+            margin: 0 auto;
+            display: block;
+            border-radius: 10px;
+        }
+
+        /* --- JUDUL PRODUK --- */
+        .produk h3 {
+            font-size: 12px;        /* kecil */
+            margin-top: 6px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        /* --- SECTION TITLE --- */
+        .kategori-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 10px 0 5px 16px;
+        }
+    </style>
+
+</head>
+<body>
+
+    <h2 class="kategori-title">Apps</h2>
+
+    <div class="produk-container">
+
+        <a href="detail-spotify.html" class="produk" data-kategori="apps">
+            <img src="spotify.png" alt="Spotify">
+            <h3>Spotify</h3>
+        </a>
+
+        <a href="detail-canva.html" class="produk" data-kategori="apps">
+            <img src="canva.png" alt="Canva">
+            <h3>Canva Pro</h3>
+        </a>
+
+        <a href="detail-grammarly.html" class="produk" data-kategori="apps">
+            <img src="grammarly.png" alt="Grammarly">
+            <h3>Grammarly</h3>
+        </a>
+
+        <a href="detail-capcut.html" class="produk" data-kategori="apps">
+            <img src="capcut.png" alt="CapCut">
+            <h3>CapCut Pro</h3>
+        </a>
+
+        <a href="detail-vsco.html" class="produk" data-kategori="apps">
+            <img src="vsco.png" alt="VSCO">
+            <h3>VSCO Pro</h3>
+        </a>
+
+        <a href="detail-wps.html" class="produk" data-kategori="apps">
+            <img src="wps.png" alt="WPS Office">
+            <h3>WPS Premium</h3>
+        </a>
+
+    </div>
+
+</body>
+</html>
