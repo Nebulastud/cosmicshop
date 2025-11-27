@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COSMIC SHOP - Toko</title>
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+        }
+
+        /* VIDEO BACKGROUND */
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: brightness(60%);
+        }
+
+        header {
+            padding: 25px;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            background: rgba(0,0,0,0.55);
+            letter-spacing: 2px;
+        }
+
+        /* SEARCH */
+        .filter-box {
+            padding: 15px;
+            text-align: center;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+        }
+
+        .filter-box input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        /* CATEGORY BUTTONS (SCROLLABLE) */
+        .kategori {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .kategori::-webkit-scrollbar {
+            display: none; /* Chrome */
+        }
+
+        .kategori button {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border: none;
+            border-radius: 10px;
+            background: #00eaff;
+            color: black;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .kategori button:hover {
+            background: white;
+        }
+
+        /* PRODUK GRID */
+        .produk-container {
+            padding: 20px;
+            margin-bottom: 90px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* HAPUS CARD, BUAT GAMBAR BULAT */
+        .produk {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        .produk img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto;
+            object-fit: cover;
+            transition: transform 0.3s;
+            border: 2px solid #00eaff;
+        }
+
+        .produk:hover img {
+            transform: scale(1.2);
+            border-color: white;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .bottom-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .bottom-nav i {
+            font-size: 22px;
+            margin-bottom: 4px;
+            transition: 0.3s;
+        }
+
+        .bottom-nav a:hover i {
+            transform: scale(1.25);
+            color: #00eaff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- VIDEO BACKGROUND -->
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="background.mp4" type="video/mp4">
+    </video>
+
+    <header>
+        TOKO DIGITAL
+    </header>
+
+    <!-- SEARCH -->
+    <div class="filter-box">
+        <input type="text" id="searchInput" placeholder="Cari produk...">
+
+        <div class="kategori">
+            <button onclick="filterKategori('all')">Semua</button>
+            <button onclick="filterKategori('apps')">Apps Premium</button>
+            <button onclick="filterKategori('sosmed')">Akun Sosmed</button>
+            <button onclick="filterKategori('nokos')">Nokos Aplikasi</button>
+            <button onclick="filterKategori('lainya')">Lainya</button>
+        </div>
+    </div>
+
+    <!-- PRODUK LIST -->
+    <div class="produk-container" id="produkList">
+
+        <a href="detail-spotify.html" class="produk" data-kategori="apps">
+            <img src="spotify.png" alt="Spotify">
+        </a>
+
+        <a href="detail-applemusic.html" class="produk" data-kategori="apps">
+            <img src="applemusic.jpg" alt="Apple Music">
+        </a>
+
+        <a href="detail-qobuz.html" class="produk" data-kategori="apps">
+            <img src="qobuz.png" alt="Qobuz">
+        </a>
+
+        <a href="detail-chatgpt.html" class="produk" data-kategori="apps">
+            <img src="chatgpt.jpeg" alt="Chat Gpt">
+        </a>
+
+        <!-- Tambahkan produk lainnya dengan format yang sama -->
+
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        // SEARCH SYSTEM
+        document.getElementById("searchInput").addEventListener("keyup", function () {
+            let value = this.value.toLowerCase();
+            let produk = document.querySelectorAll(".produk");
+
+            produk.forEach(p => {
+                let altText = p.querySelector("img").alt.toLowerCase();
+                p.style.display = altText.includes(value) ? "inline-block" : "none";
+            });
+        });
+
+        // FILTER SYSTEM
+        function filterKategori(kat) {
+            let produk = document.querySelectorAll(".produk");
+            produk.forEach(p => {
+                let jenis = p.getAttribute("data-kategori");
+                p.style.display = (kat === "all" || jenis === kat) ? "inline-block" : "none";
+            });
+        }
+    </script>
+
+    <!-- BOTTOM NAV -->
+    <div class="bottom-nav">
+        <a href="index.html">
+            <i class="fa-solid fa-house"></i>
+            Home
+        </a>
+
+        <a href="toko.html">
+            <i class="fa-solid fa-store"></i>
+            Toko
+        </a>
+
+        <a href="index1.html">
+            <i class="fa-solid fa-star"></i>
+            Testimoni
+        </a>
+
+        <a href="kontak.html">
+            <i class="fa-solid fa-phone"></i>
+            Kontak
+        </a>
+    </div>
+
+</body>
+</html>
