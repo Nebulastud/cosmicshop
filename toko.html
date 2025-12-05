@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko - Cosmic Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            color: #00d4ff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .rain {
+            position: fixed;
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(transparent, rgba(0, 212, 255, 0.3));
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #7dd3fc;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .search-box {
+            background: rgba(0, 20, 40, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 10px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: rgba(0, 212, 255, 0.6);
+            background: rgba(0, 20, 40, 0.8);
+        }
+
+        .search-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: #64748b;
+            margin-right: 10px;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #00d4ff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .category-tabs {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 5px;
+            scrollbar-width: none;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-tab {
+            flex-shrink: 0;
+            padding: 10px 20px;
+            background: rgba(0, 20, 40, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            color: #7dd3fc;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-tab:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .category-tab.active {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+            color: white;
+            box-shadow: 0 5px 20px rgba(14, 165, 233, 0.4);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .product-card {
+            background: rgba(0, 20, 40, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            border-color: rgba(0, 212, 255, 0.6);
+            background: rgba(0, 20, 40, 0.8);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .product-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            background: rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 8px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #0ea5e9;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .product-stock {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 10, 20, 0.95);
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #00d4ff;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state svg {
+            width: 80px;
+            height: 80px;
+            stroke: #64748b;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            color: #64748b;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div id="rain"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-title">TOKO</div>
+            <div class="header-subtitle">PILIH PRODUK COSMIC</div>
+        </div>
+
+        <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="Cari produk...">
+        </div>
+
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="semua">SEMUA</div>
+            <div class="category-tab" data-category="apps">APPS PREMIUM</div>
+            <div class="category-tab" data-category="music">MUSIC APPS</div>
+            <div class="category-tab" data-category="sosmed">SOSIAL MEDIA</div>
+            <div class="category-tab" data-category="followers">FOLLOWERS SOSMED</div>
+            <div class="category-tab" data-category="jasa">JASA</div>
+        </div>
+
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            HOME
+        </a>
+        <a href="#" class="nav-item active">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+            TOKO
+        </a>
+        <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+            TESTIMONI
+        </a>
+        <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            KONTAK
+        </a>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create rain effect
+        const rainContainer = document.getElementById('rain');
+        for (let i = 0; i < 20; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1 + 1) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            rainContainer.appendChild(drop);
+        }
+
+        // Products data (empty for now)
+        const products = [];
+
+        const getIconSVG = (iconType) => {
+            const icons = {
+                play: '<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>',
+                music: '<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+                youtube: '<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>',
+                users: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+                heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+                badge: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>',
+                image: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
+                video: '<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>',
+                chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>'
+            };
+            return icons[iconType] || icons.play;
+        };
+
+        let currentCategory = 'semua';
+        let currentSearch = '';
+
+        const renderProducts = () => {
+            const grid = document.getElementById('productsGrid');
+            const filtered = products.filter(p => {
+                const matchCategory = currentCategory === 'semua' || p.category === currentCategory;
+                const matchSearch = p.name.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchCategory && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <div class="empty-state-text">Produk tidak ditemukan</div>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card">
+                    <div class="product-icon">
+                        <svg viewBox="0 0 24 24">
+                            ${getIconSVG(product.icon)}
+                        </svg>
+                    </div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">${product.price}</div>
+                    <div class="product-stock">${product.stock}</div>
+                </div>
+            `).join('');
+        };
+
+        // Category tabs
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentCategory = tab.dataset.category;
+                renderProducts();
+            });
+        });
+
+        // Search
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderProducts();
+        });
+
+        // Initial render
+        renderProducts();
+    </script>
+</body>
+</html>
