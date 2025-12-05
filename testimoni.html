@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimoni - Cosmic Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            color: #00d4ff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .rain {
+            position: fixed;
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(transparent, rgba(0, 212, 255, 0.3));
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #7dd3fc;
+            font-size: 14px;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            stroke: #64748b;
+            margin-bottom: 30px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            color: #64748b;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 10, 20, 0.95);
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #00d4ff;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div id="rain"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-title">TESTIMONI<br>PELANGGAN</div>
+            <p class="header-subtitle">
+                Dengarkan cerita sukses dari<br>pelanggan kami di seluruh galaksi
+            </p>
+        </div>
+
+        <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+            <div class="empty-state-text">Belum ada testimoni tersedia</div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+            </svg>
+            HOME
+        </a>
+        <a href="toko.html" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+            TOKO
+        </a>
+        <a href="#" class="nav-item active">
+            <svg viewBox="0 0 24 24">
+                <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+            TESTIMONI
+        </a>
+        <a href="#" class="nav-item">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            KONTAK
+        </a>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Create rain effect
+        const rainContainer = document.getElementById('rain');
+        for (let i = 0; i < 20; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1 + 1) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            rainContainer.appendChild(drop);
+        }
+    </script>
+</body>
+</html>
