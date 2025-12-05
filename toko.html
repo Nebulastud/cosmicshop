@@ -375,8 +375,17 @@
             rainContainer.appendChild(drop);
         }
 
-        // Products data (empty for now)
-        const products = [];
+        // Products data
+        const products = [
+            {
+                id: 'spotify-premium',
+                name: 'Spotify Premium',
+                stock: 'Stok: Tersedia',
+                category: 'music',
+                icon: 'music',
+                detailPage: 'spotify-detail.html'
+            }
+        ];
 
         const getIconSVG = (iconType) => {
             const icons = {
