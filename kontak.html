@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Cosmic Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            color: #00d4ff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
+
+        /* Stars */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Rain */
+        .rain {
+            position: fixed;
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(transparent, rgba(0, 212, 255, 0.3));
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            text-shadow: 0 0 20px #00d4ff;
+            margin-bottom: 10px;
+        }
+
+        .header-subtitle {
+            color: #7dd3fc;
+            font-size: 14px;
+            letter-spacing: 2px;
+            line-height: 1.6;
+        }
+
+        .contact-card {
+            background: rgba(0, 20, 40, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(0, 212, 255, 0.6);
+            background: rgba(0, 20, 40, 0.8);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-button {
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 15px;
+            background: #0ea5e9;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-button:hover {
+            background: #0284c7;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(14, 165, 233, 0.5);
+        }
+
+        .contact-button svg {
+            width: 18px;
+            height: 18px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: rgba(14, 165, 233, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: #00d4ff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .contact-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            color: #7dd3fc;
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: rgba(0, 20, 40, 0.6);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .info-box-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+
+        .info-box-text {
+            font-size: 13px;
+            color: #94a3b8;
+            line-height: 1.6;
+            letter-spacing: 0.5px;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 10, 20, 0.95);
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active {
+            color: #00d4ff;
+        }
+
+        .nav-item:hover {
+            color: #00d4ff;
+        }
+
+        .nav-item svg {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 5px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ======================================================
+           ANIMASI ZOOM + SLIDE UP (SAMA PERSIS SEPERTI INDEX.HTML)
+           ====================================================== */
+        .animate {
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+            animation: showUp 0.8s ease-out forwards;
+        }
+
+        @keyframes showUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div id="rain"></div>
+
+    <div class="container">
+        <div class="header animate">
+            <div class="header-title">HUBUNGI KAMI</div>
+            <p class="header-subtitle">
+                Tim kami siap membantu Anda 24/7<br>untuk pertanyaan apapun
+            </p>
+        </div>
+
+        <div class="contact-card animate">
+            <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </div>
+            <div class="contact-title">WHATSAPP</div>
+            <div class="contact-info">Chat langsung dengan customer service kami</div>
+            <button class="contact-button" onclick="window.open('https://wa.me/6283821627163', '_blank')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                BUKA WHATSAPP
+            </button>
+        </div>
+
+        <div class="contact-card animate">
+            <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <div class="contact-title">EMAIL</div>
+            <div class="contact-info">Kirim pertanyaan Anda ke email kami</div>
+            <button class="contact-button" onclick="window.open('mailto:cosmicshop110@gmail.com', '_blank')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                KIRIM EMAIL
+            </button>
+        </div>
+
+        <div class="contact-card animate">
+            <div class="contact-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 2L11 13M21 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+            </div>
+            <div class="contact-title">TELEGRAM</div>
+            <div class="contact-info">Hubungi kami melalui Telegram</div>
+            <button class="contact-button" onclick="window.open('https://t.me/cosmicshop3', '_blank')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 2L11 13M21 2l-7 20-4-9-9-4 20-7z"/>
+                </svg>
+                BUKA TELEGRAM
+            </button>
+        </div>
+
+        <div class="info-box animate">
+            <div class="info-box-title">JAM OPERASIONAL</div>
+            <div class="info-box-text">
+                Senin - Minggu<br>
+                24 Jam Non-Stop<br><br>
+                Respon cepat dalam 5-10 menit
+            </div>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            HOME
+        </a>
+        <a href="toko.html" class="nav-item">
+            TOKO
+        </a>
+        <a href="testimoni.html" class="nav-item">
+            TESTIMONI
+        </a>
+        <a href="kontak.html" class="nav-item active">
+            KONTAK
+        </a>
+    </div>
+
+    <script>
+        // Stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Rain
+        const rainContainer = document.getElementById('rain');
+        for (let i = 0; i < 20; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1 + 1) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            rainContainer.appendChild(drop);
+        }
+
+        // Delay animasi satu per satu
+        const animated = document.querySelectorAll('.animate');
+        animated.forEach((el, i) => {
+            el.style.animationDelay = (i * 0.25) + "s";
+        });
+    </script>
+
+</body>
+</html>
