@@ -363,8 +363,8 @@
                     Bergaransi 24Jam
                 </div>
             </div>
-            <button class="buy-button disabled" disabled>
-                🛒 Stok Habis
+            <button class="buy-button" onclick="orderProduct('Spotify Student 1 Bulan', 'Rp 10.000', 'Bergaransi 24 Jam')">
+                🛒 Beli Sekarang
             </button>
         </div>
 
@@ -379,7 +379,7 @@
                 <div class="info-line">
                     <span class="info-icon">📦</span>
                     <span class="info-label">Total Stock:</span>
-                    <span class="info-value stock-available">∞</span>
+                    <span class="info-value stock-available">0</span>
                 </div>
                 <div class="info-line">
                     <span class="info-icon">💰</span>
@@ -466,7 +466,7 @@
                           `📝 Detail: ${description}%0A%0A` +
                           `Mohon info lebih lanjut. Terima kasih!`;
             
-            const whatsappNumber = '6281234567890'; // Ganti dengan nomor WhatsApp Anda
+            const whatsappNumber = '6283821627163'; // Ganti dengan nomor WhatsApp Anda
             const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
             
             window.open(whatsappURL, '_blank');
