@@ -321,6 +321,7 @@
             <div class="category-tab" data-category="followers">FOLLOWERS SOSMED</div>
             <div class="category-tab" data-category="jasa">JASA</div>
             <div class="category-tab" data-category="vpn">VPN PREMIUM</div>
+            <div class="category-tab" data-category="nokos">NOKOS ALL APK</div>
         </div>
 
         <div class="products-grid" id="productsGrid"></div>
@@ -399,11 +400,21 @@ const products = [
     { name: 'DeepL Pro', price: 'Rp 10.000', stock: 'Stok: Ready', category: 'apps', icon: 'chat', detailPage: 'deepl-detail.html' },
     { name: 'Google One Premium', price: 'Rp 10.000', stock: 'Stok: Ready', category: 'apps', icon: 'cloud', detailPage: 'googleone-detail.html' },
 
-    // ✅ VPN Premium
+    // VPN
     { name: 'HMA VPN', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'hma-detail.html' },
     { name: 'ExpressVPN', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'expressvpn-detail.html' },
-    { name: 'Surfshark VPN', price: 'Rp 15.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'surfshark-detail.html' }
+    { name: 'Surfshark VPN', price: 'Rp 15.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'surfshark-detail.html' },
+
+    // Sosial Media
+    { name: 'Facebook Premium', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'sosmed', icon: 'user', detailPage: 'facebook-detail.html' },
+    { name: 'Instagram Premium', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'sosmed', icon: 'camera', detailPage: 'instagram-detail.html' },
+    { name: 'TikTok Premium', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'sosmed', icon: 'video', detailPage: 'tiktok-detail.html' },
+
+    // ⭐ NOKOS (Nomor Luar Negeri)
+    { name: 'WhatsApp Nokos', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'nokos', icon: 'phone', detailPage: 'whatsapp-nokos.html' },
+    { name: 'Telegram Nokos', price: 'Rp 5.000', stock: 'Stok: Ready', category: 'nokos', icon: 'message-circle', detailPage: 'telegram-nokos.html' }
 ];
+
 
 
         const getIconSVG = (iconType) => {
