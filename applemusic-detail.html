@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Music - Cosmic Shop</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Arial', sans-serif; background: linear-gradient(180deg, #000428 0%, #004e92 100%);
+            color: #00d4ff; min-height: 100vh; position: relative; overflow-x: hidden; padding-bottom: 80px;
+        }
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .rain { position: fixed; width: 1px; height: 50px; background: linear-gradient(transparent, rgba(0, 212, 255, 0.3)); animation: fall linear infinite; }
+        @keyframes fall { to { transform: translateY(100vh); } }
+        .container { max-width: 450px; margin: 0 auto; padding: 20px; position: relative; z-index: 1; }
+        .logo-container { text-align: center; margin: 30px 0; }
+        .product-logo {
+            width: 120px; height: 120px; margin: 0 auto; background: linear-gradient(135deg, #FA243C 0%, #FF5A6E 100%);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 40px rgba(250, 36, 60, 0.4); animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .product-logo svg { width: 70px; height: 70px; fill: white; }
+        .marquee-container { background: rgba(0, 20, 40, 0.6); border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 10px; overflow: hidden; margin: 20px 0; padding: 15px 0; }
+        .marquee { display: flex; animation: scroll 20s linear infinite; white-space: nowrap; }
+        .marquee-text { padding: 0 50px; font-size: 16px; font-weight: bold; color: #00d4ff; letter-spacing: 3px; text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .product-card { background: rgba(0, 20, 40, 0.6); border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 15px; padding: 0; margin-bottom: 20px; overflow: hidden; }
+        .info-box { padding: 20px; border-bottom: 1px dashed rgba(0, 212, 255, 0.3); }
+        .info-line { display: flex; align-items: flex-start; margin-bottom: 12px; font-size: 14px; letter-spacing: 0.5px; line-height: 1.6; }
+        .info-line:last-child { margin-bottom: 0; }
+        .info-icon { margin-right: 8px; flex-shrink: 0; }
+        .info-label { color: #7dd3fc; font-weight: bold; }
+        .info-value { color: #00d4ff; margin-left: 5px; }
+        .price-value { color: #FA243C; font-weight: bold; font-size: 16px; }
+        .stock-out { color: #ef4444; }
+        .desc-box { padding: 20px; background: rgba(0, 30, 50, 0.4); }
+        .desc-title { display: flex; align-items: center; margin-bottom: 12px; font-size: 14px; color: #7dd3fc; font-weight: bold; letter-spacing: 1px; }
+        .desc-content { color: #00d4ff; font-size: 13px; line-height: 1.8; letter-spacing: 0.5px; padding-left: 20px; }
+        .buy-button {
+            width: 100%; padding: 15px; background: linear-gradient(135deg, #FA243C 0%, #FF5A6E 100%);
+            border: none; border-radius: 0 0 13px 13px; color: white; font-size: 15px; font-weight: bold;
+            letter-spacing: 1px; cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .buy-button:hover { background: linear-gradient(135deg, #FF5A6E 0%, #FA243C 100%); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(250, 36, 60, 0.4); }
+        .buy-button:active { transform: translateY(0); }
+        .buy-button.disabled { background: #64748b; cursor: not-allowed; }
+        .buy-button.disabled:hover { transform: none; box-shadow: none; }
+        .back-button {
+            width: 100%; padding: 15px; background: rgba(0, 20, 40, 0.6); border: 2px solid rgba(0, 212, 255, 0.3);
+            border-radius: 15px; color: #00d4ff; font-size: 15px; font-weight: bold; letter-spacing: 1px;
+            cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center;
+            gap: 8px; margin-top: 20px; text-decoration: none;
+        }
+        .back-button:hover { border-color: rgba(0, 212, 255, 0.6); background: rgba(0, 20, 40, 0.8); transform: translateX(-5px); }
+        .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0, 10, 20, 0.95); border-top: 1px solid rgba(0, 212, 255, 0.3); display: flex; justify-content: space-around; padding: 15px 0; z-index: 100; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; color: #64748b; text-decoration: none; font-size: 11px; letter-spacing: 1px; transition: all 0.3s ease; }
+        .nav-item.active { color: #00d4ff; }
+        .nav-item svg { width: 24px; height: 24px; margin-bottom: 5px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .nav-item:hover { color: #00d4ff; }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    <div id="rain"></div>
+    <div class="container">
+        <div class="logo-container">
+            <div class="product-logo">
+                <svg viewBox="0 0 24 24" fill="white">
+                    <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+                </svg>
+            </div>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee">
+                <span class="marquee-text">✨ APPLE MUSIC ✨ MURAH & TERPERCAYA ✨ GARANSI RESMI ✨</span>
+                <span class="marquee-text">✨ APPLE MUSIC ✨ MURAH & TERPERCAYA ✨ GARANSI RESMI ✨</span>
+            </div>
+        </div>
+        <div class="product-card">
+            <div class="info-box">
+                <div class="info-line"><span class="info-icon">🛍</span><span class="info-label">Produk:</span><span class="info-value">Apple Music</span></div>
+                <div class="info-line"><span class="info-icon">📦</span><span class="info-label">Total Stock:</span><span class="info-value stock-out">0x</span></div>
+                <div class="info-line"><span class="info-icon">💰</span><span class="info-label">Harga:</span><span class="price-value">Rp 10.000</span></div>
+            </div>
+            <div class="desc-box">
+                <div class="desc-title"><span class="info-icon">📝</span>Deskripsi Produk:</div>
+                <div class="desc-content">Private Account</div>
+            </div>
+            <button class="buy-button disabled" disabled>🛒 Stok Habis</button>
+        </div>
+        <a href="toko.html" class="back-button">⬅️ Kembali ke Toko</a>
+    </div>
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>HOME</a>
+        <a href="toko.html" class="nav-item active"><svg viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>TOKO</a>
+        <a href="testimoni.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>TESTIMONI</a>
+        <a href="kontak.html" class="nav-item"><svg viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>KONTAK</a>
+    </div>
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+        const rainContainer = document.getElementById('rain');
+        for (let i = 0; i < 20; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'rain';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 1 + 1) + 's';
+            drop.style.animationDelay = Math.random() * 2 + 's';
+            rainContainer.appendChild(drop);
+        }
+    </script>
+</body>
+</html>
