@@ -377,27 +377,34 @@
         }
 
         // Products data
-        const products = [
-            // Music Apps
-            { name: 'Spotify Premium', price: 'Rp 10.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'spotify-detail.html' },
-            { name: 'Apple Music', price: 'Rp 30.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'applemusic-detail.html' },
-            { name: 'Qobuz', price: 'Rp 35.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'qobuz-detail.html' },
-            
-            // Apps Premium
-            { name: 'ChatGPT Plus', price: 'Rp 45.000', stock: 'Stok: Ready', category: 'apps', icon: 'chat', detailPage: 'chatgpt-detail.html' },
-            { name: 'Canva Pro', price: 'Rp 20.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'canva-detail.html' },
-            { name: 'Gemini AI', price: 'Rp 40.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'gemini-detail.html' },
-            { name: 'Alight Motion', price: 'Rp 15.000', stock: 'Stok: Ready', category: 'apps', icon: 'video', detailPage: 'alight-detail.html' },
-            { name: 'Vidio Premium', price: 'Rp 18.000', stock: 'Stok: Ready', category: 'apps', icon: 'play', detailPage: 'vidio-detail.html' },
-            { name: 'YouTube Premium', price: 'Rp 22.000', stock: 'Stok: Ready', category: 'apps', icon: 'youtube', detailPage: 'youtube-detail.html' },
-            { name: 'VIU Premium', price: 'Rp 20.000', stock: 'Stok: Ready', category: 'apps', icon: 'play', detailPage: 'viu-detail.html' },
-            { name: 'Scribd', price: 'Rp 25.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'scribd-detail.html' },
-            { name: 'Paysafecard', price: 'Rp 50.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'paysafecard-detail.html' },
-            { name: 'PicsArt Gold', price: 'Rp 18.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'picsart-detail.html' },
-            { name: 'Zoom Pro', price: 'Rp 35.000', stock: 'Stok: Ready', category: 'apps', icon: 'video', detailPage: 'zoom-detail.html' },
-            { name: 'PayPal Balance', price: 'Rp 100.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'paypal-detail.html' },
-            { name: 'DeepL Pro', price: 'Rp 30.000', stock: 'Stok: Ready', category: 'apps', icon: 'chat', detailPage: 'deepl-detail.html' }
-        ];
+const products = [
+    // Music Apps
+    { name: 'Spotify Premium', price: 'Rp 10.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'spotify-detail.html' },
+    { name: 'Apple Music', price: 'Rp 30.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'applemusic-detail.html' },
+    { name: 'Qobuz', price: 'Rp 35.000', stock: 'Stok: Ready', category: 'music', icon: 'music', detailPage: 'qobuz-detail.html' },
+
+    // Apps Premium
+    { name: 'ChatGPT Plus', price: 'Rp 45.000', stock: 'Stok: Ready', category: 'apps', icon: 'chat', detailPage: 'chatgpt-detail.html' },
+    { name: 'Canva Pro', price: 'Rp 20.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'canva-detail.html' },
+    { name: 'Gemini AI', price: 'Rp 40.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'gemini-detail.html' },
+    { name: 'Alight Motion', price: 'Rp 15.000', stock: 'Stok: Ready', category: 'apps', icon: 'video', detailPage: 'alight-detail.html' },
+    { name: 'Vidio Premium', price: 'Rp 18.000', stock: 'Stok: Ready', category: 'apps', icon: 'play', detailPage: 'vidio-detail.html' },
+    { name: 'YouTube Premium', price: 'Rp 22.000', stock: 'Stok: Ready', category: 'apps', icon: 'youtube', detailPage: 'youtube-detail.html' },
+    { name: 'VIU Premium', price: 'Rp 20.000', stock: 'Stok: Ready', category: 'apps', icon: 'play', detailPage: 'viu-detail.html' },
+    { name: 'Scribd', price: 'Rp 25.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'scribd-detail.html' },
+    { name: 'Paysafecard', price: 'Rp 50.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'paysafecard-detail.html' },
+    { name: 'PicsArt Gold', price: 'Rp 18.000', stock: 'Stok: Ready', category: 'apps', icon: 'image', detailPage: 'picsart-detail.html' },
+    { name: 'Zoom Pro', price: 'Rp 35.000', stock: 'Stok: Ready', category: 'apps', icon: 'video', detailPage: 'zoom-detail.html' },
+    { name: 'PayPal Balance', price: 'Rp 100.000', stock: 'Stok: Ready', category: 'apps', icon: 'badge', detailPage: 'paypal-detail.html' },
+    { name: 'DeepL Pro', price: 'Rp 30.000', stock: 'Stok: Ready', category: 'apps', icon: 'chat', detailPage: 'deepl-detail.html' },
+    { name: 'Google One Premium', price: 'Rp 25.000', stock: 'Stok: Ready', category: 'apps', icon: 'cloud', detailPage: 'googleone-detail.html' },
+
+    // ✅ VPN Premium
+    { name: 'HMA VPN', price: 'Rp 20.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'hma-detail.html' },
+    { name: 'ExpressVPN', price: 'Rp 30.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'expressvpn-detail.html' },
+    { name: 'Surfshark VPN', price: 'Rp 25.000', stock: 'Stok: Ready', category: 'vpn', icon: 'shield', detailPage: 'surfshark-detail.html' }
+];
+
 
         const getIconSVG = (iconType) => {
             const icons = {
